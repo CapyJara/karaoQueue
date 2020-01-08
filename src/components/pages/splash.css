@@ -1,3 +1,50 @@
 .Splash {
+  height: 100vh;
+  width: 100vw;
+  background: #520070;
+  display: grid;
+  grid-template-rows: 25% 1fr;
+
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #dd55b3;
+    text-shadow: .5px .5px rgb(66, 9, 73);
+    font-size: 2em;
+  }
   
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    h2 {
+      color: #dd55b3;
+      text-shadow: .5px .5px rgb(66, 9, 73);
+      font-size: 2em;
+    }
+    
+    input {
+      width: 14em;
+      height: 3em;
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    button {
+      background: white;
+      margin: 1em;
+      padding: .5em;
+      width: 13em;
+      font-size: 1.2em;
+    }
+  }
 }

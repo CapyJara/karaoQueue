@@ -1,88 +1,55 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import styles from './Splash.css';
 import usePlaylistEmitters from '../hooks/playlistState';
-import { usePlayListState } from '../../socket';
-import YouTube from 'react-youtube';
-import YTSearch from 'youtube-api-search';
+import styles from './splash.css';
 
-const superSecretCode = 'AIzaSyBwTEj5b5Vol3PHBtF2ZzChHSzbSNpk24c';
+const Start = ({ history }) => {
+  const [newRoomName, setNewRoomName] = useState('');
+  const [roomToJoin, setRoomToJoin] = useState('');
 
-const Splash = () => {
-  const [link, setLink] = useState(null);
-  const [searchList, setSearchList] = useState([]);
-  const { addLink, finishedSong } = usePlaylistEmitters();
-  const { playlist } = usePlayListState();
+  const { createRoom, joinRoom } = usePlaylistEmitters();
 
-  const handleChange = e => {
-    setLink(e.target.value);
+
+  const handleChange = ({ target }) => {
+    const update = {
+      new: setNewRoomName(target.value),
+      join: setRoomToJoin(target.value)
+    };
+    update[target.name];
   };
 
-  const submit = e => {
+  const createARoom = e => {
     e.preventDefault();
-    setLink('');
-    videoSearch(`${link} karaoke`);
+    createRoom(newRoomName);
+    history.push(`/${newRoomName}`);
   };
-
-  const opts = {
-    height: '390',
-    width: '640'
-  };
-
-  const onEnd = () => {
-    finishedSong();
-  };
-
-  const videoSearch = (term) => {
-    YTSearch({ key: superSecretCode, term }, (videos) => {
-      setSearchList(videos.map(i => {
-        const { thumbnails, title } = i.snippet;
-        const { videoId } = i.id;
-        const image = thumbnails.medium ? thumbnails.medium.url : thumbnails.default.url;
-
-        return {
-          image,
-          title,
-          videoId
-        };
-      }));
-    });
-  };
-
-  const addToPlayList = (song) => {
-    addLink(song);
-    setSearchList([]);
+  
+  const joinARoom = e => {
+    e.preventDefault();
+    joinRoom(roomToJoin);
+    history.push(`/${roomToJoin}`);
   };
 
   return (
-    <section className={styles.Splash}>
-      <h1>KaraoQueue</h1>
-      
-      {playlist && <YouTube
-        videoId={playlist[0] ? playlist[0].videoId : null }
-        opts={opts}
-        onEnd={onEnd}
-      />}
+    <div className={styles.Splash}>
+      <header>
+        <h1>KaraoQueue</h1>
+      </header>
 
-      <form onSubmit={submit}>
-        <input type="text" onChange={handleChange} value={link || ''}/>
-        <button>Enter</button>
-      </form>
-      <ul>
-        {playlist && playlist.map(i => {
-          return <li key={i} >{i.title}</li>;
-        })}
-      </ul>
-      <ul>
-        {searchList.map(i => {
-          return (
-            <li key={i.channelId} onClick={() => addToPlayList(i)}>
-              <img src={i.image}/>
-              <h2>{i.title}</h2>
-            </li>);
-        })}
-      </ul>
-    </section>
+      <section>
+        <form onSubmit={createARoom}>
+          <h2>start a new concert</h2>
+          <input type="string" name="new" onChange={handleChange} placeholder="name of new concert"/>
+          <button>create</button>
+        </form>
+        <form onSubmit={joinARoom}>
+          <h2>join an existing concert</h2>
+          <input type="string" name="join" onChange={handleChange} placeholder="id of current concert"/>
+          <button>join</button>
+        </form>
+      </section>
+    </div>
   );
 };
 
-export default Splash;
+export default Start;
