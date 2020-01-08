@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import styles from './Splash.css';
 import usePlaylistEmitters from '../hooks/playlistState';
 import { usePlayListState } from '../../socket';
+import YouTube from 'react-youtube';
 
 const Splash = () => {
   const [link, setLink] = useState(null);
-  const { addLink } = usePlaylistEmitters();
+  const { addLink, finishedSong } = usePlaylistEmitters();
   const { playlist } = usePlayListState();
 
   const handleChange = e => {
@@ -18,11 +19,25 @@ const Splash = () => {
     setLink('');
   };
 
-  console.log(playlist);
+  const opts = {
+    height: '390',
+    width: '640'
+  };
+
+  const onEnd = () => {
+    finishedSong();
+  };
 
   return (
     <section className={styles.Splash}>
       <h1>Welcome</h1>
+      
+      {playlist && <YouTube
+        videoId={playlist[0]}
+        opts={opts}
+        onEnd={onEnd}
+      />}
+
       <form onSubmit={submit}>
         <input type="text" onChange={handleChange} value={link || ''}/>
         <button>Enter</button>
