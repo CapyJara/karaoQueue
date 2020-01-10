@@ -1,6 +1,8 @@
 :root {
-  --dark-purple: #520070
-  --purple: #8f1394
-  --pink: #dd55b3
-  --white: #fbeeff
+  --dark-blue: rgb(9, 0, 38);
+  --pink: #dd55b3;
+  --off-white: #fbeeff;
+
+  --header-font: 'Alfa Slab One', Cursive;
+  --paragraph-font: 'Gentium Book Basic', Serif;
 }

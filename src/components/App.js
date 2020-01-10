@@ -5,7 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import Splash from '../components/pages/Splash';
-import Main from '../components/pages/Main';
+import Concert from '../components/pages/Concert';
 import './app.css';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
     <Router >
       <Switch>
         <Route exact path="/" component={Splash} />
-        <Route  path="/:roomId" component={Main} />
+        <Route  path="/:roomId" component={Concert} />
       </Switch>
     </Router>
   );
