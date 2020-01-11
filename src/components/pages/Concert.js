@@ -10,11 +10,11 @@ import { Link } from 'react-router-dom';
 const superSecretCode = 'AIzaSyBwTEj5b5Vol3PHBtF2ZzChHSzbSNpk24c';
 
 const Concert = ({ match }) => {
-  const [link, setLink] = useState(null);
-  const [name, setName] = useState(null);
+  const [link, setLink] = useState('');
+  const [name, setName] = useState('');
   const [searchList, setSearchList] = useState([]);
   const [modal, toggleModal] = useState(false);
-  const { addLink, finishedSong, joinRoom } = usePlaylistEmitters();
+  const { addLink, finishedSong, joinRoom, removeSong } = usePlaylistEmitters();
   const { playlist } = usePlayListState();
   const roomId = match.params.roomId;
 
@@ -37,14 +37,8 @@ const Concert = ({ match }) => {
     setLink('');
   };
   
-  const open = e => {
-    e.preventDefault();
-    toggleModal(true);
-  };
-  const close = e => {
-    e.preventDefault();
-    toggleModal(false);
-  };
+  const open = () => toggleModal(true);
+  const close = () => toggleModal(false);
   
   const onEnd = () => {
     finishedSong(roomId);
@@ -70,10 +64,12 @@ const Concert = ({ match }) => {
     if(name) {
       const data = {
         song,
-        roomId
+        roomId,
+        name
       };
       addLink(data);
       setSearchList([]);
+      close();
     }
     else {
       document.getElementsByName('name')[0].className = styles.Shake;
@@ -83,12 +79,14 @@ const Concert = ({ match }) => {
     }
   };
 
+  const deleteFromPlaylist = data => removeSong(data);
+
   return (
     <section className={styles.Concert}>
       <Link to='/'>KaraoQueue</Link>
       
       {playlist && <YouTube
-        videoId={playlist[0] ? playlist[0].videoId : null }
+        videoId={playlist[0] ? playlist[0].song.videoId : null }
         onEnd={onEnd}
       />}
 
@@ -102,15 +100,15 @@ const Concert = ({ match }) => {
       {modal && <section className={styles.Modal}>
         <button className={styles.Exit} onClick={close}>X</button>
         <form onSubmit={submit}>
-          <input type="text" name="name" onChange={handleNameChange} value={name} placeholder="Your Name"/>
-          <input type="text" name="link" onChange={handleLinkChange} value={link} placeholder="enter name of song"/>
+          <input type="text" name="name" onChange={handleNameChange} value={name} placeholder="Your Name" autoComplete="off"/>
+          <input type="text" name="link" onChange={handleLinkChange} value={link} placeholder="enter name of song" autoComplete="off"/>
           <button>Search</button>
         </form>
         
         <ul>
           {searchList.map(i => {
             return (
-              <li key={i.channelId} onClick={() => addToPlayList(i)}>
+              <li key={i.videoId} onClick={() => addToPlayList(i)}>
                 <img src={i.image}/>
                 <h2>{i.title}</h2>
               </li>);
@@ -118,9 +116,13 @@ const Concert = ({ match }) => {
         </ul>        
       </section>}
 
-      <ul>
+      <ul className={styles.Playlist}>
         {playlist && playlist.map(i => {
-          return <li key={i.title + i} >{i.title}</li>;
+          return <li key={i.song.videoId} >
+            <h2>{i.name}</h2>
+            <h3>{i.song.title}</h3>
+            <div onClick={() => deleteFromPlaylist(i)}>X</div>
+          </li>;
         })}
       </ul>
 

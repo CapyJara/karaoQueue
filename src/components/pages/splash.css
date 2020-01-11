@@ -43,15 +43,20 @@
       border: none;
       border-radius: 24px;
       background: var(--off-white);
+      color: var(--pink);
+      font-family: var(--paragraph-font);
     }
     
     button {
       margin: 1em;
       padding: .5em;
       width: 9em;
-      font-size: 1em;
+      font-size: 1.2em;
       border-radius: 24px;
       background: var(--off-white);
+      color: var(--pink);
+      font-family: var(--paragraph-font);
+      font-weight: bold;
     }
   }
 }

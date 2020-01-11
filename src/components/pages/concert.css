@@ -2,7 +2,7 @@
 
 .Concert {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   background: var(--dark-blue);
   display: flex;
   flex-direction: column;
@@ -22,7 +22,11 @@
   div {
     display: flex;
     justify-content: center;
-    width: 80%;
+    
+    iframe {
+      height: 10em;
+      width: 22em;
+    }
   }
 }
 
@@ -32,6 +36,9 @@
   border-radius: 3em;
   margin: 1em;
   width: 8em;
+  font-family: var(--paragraph-font);
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .Modal {
@@ -44,6 +51,7 @@
   border-radius: .5em;
   display: grid;
   grid-template-rows: 23% 1fr;
+  border: 5px solid var(--pink) ;
 
   form {
     display: flex;
@@ -63,10 +71,6 @@
       color: var(--pink);
       margin: .4em;
       font-family: var(--paragraph-font);
-
-      ::placeholder {
-        color: red;
-      }
     }
 
     button {
@@ -85,7 +89,6 @@
     overflow: scroll;
     padding: 0;
     margin: 0;
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,13 +98,13 @@
       list-style: none;
       display: flex;
       align-items: center;
-      margin: 1em;
       height: 5em;
       font-family: var(--paragraph-font);
       background: var(--dark-blue);
       color: var(--pink);
       padding: .3em;
       border-radius: .4em;
+      margin: 1em;
 
       img {
        height: 4em;
@@ -147,4 +150,50 @@
   80% { transform: translate(-1px, -1px) rotate(1deg); }
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+
+.Playlist {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 25% 1fr 8%;
+    width: 100%;
+    background: var(--off-white);
+    border-radius: 1em;
+    margin: 1em;
+
+    h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h3 {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      padding: 1em;
+    }
+
+    div {
+      background: red;
+      border-radius: 0 1em 1em 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: var(--paragraph-font);
+      font-weight: bolder;
+      color: var(--dark-blue);
+    }
+  }
 }
