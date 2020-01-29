@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import usePlaylistEmitters from '../hooks/playlistState';
 import styles from './splash.css';
+import shortid  from 'short-id';
 
 const Start = ({ history }) => {
   const [newRoomName, setNewRoomName] = useState('');
@@ -20,8 +21,9 @@ const Start = ({ history }) => {
 
   const createARoom = e => {
     e.preventDefault();
-    createRoom(newRoomName);
-    history.push(`/${newRoomName}`);
+    const id = shortid.generate();
+    createRoom({ id, newRoomName });
+    history.push(`/${id}`);
   };
   
   const joinARoom = e => {

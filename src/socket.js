@@ -5,8 +5,8 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import io from 'socket.io-client';
 
-// const socket = io.connect('http://localhost:7891');
-const socket = io.connect('https://karaoqueue.herokuapp.com/');
+const socket = io.connect('http://localhost:7891');
+// const socket = io.connect('https://karaoqueue.herokuapp.com/');
 
 const SocketContext = createContext(socket);
 

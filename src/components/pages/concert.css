@@ -16,7 +16,11 @@
     font-size: 3.4em;
     margin: .5em;
     font-family: var(--header-font);
+  }
 
+  h1 {
+    color: var(--pink);
+    font-family: var(--header-font);
   }
 
   div {
@@ -98,7 +102,6 @@
       list-style: none;
       display: flex;
       align-items: center;
-      height: 5em;
       font-family: var(--paragraph-font);
       background: var(--dark-blue);
       color: var(--pink);

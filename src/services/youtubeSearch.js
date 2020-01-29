@@ -9,8 +9,8 @@ const search = (options, callback) => {
 
   const params = {
     type: 'video',
-    videoEmbeddable: 'true',
-    videoSyndicated: 'true',
+    videoEmbeddable: true,
+    videoSyndicated: true,
     part: 'snippet',
     key: options.key,
     q: options.term,

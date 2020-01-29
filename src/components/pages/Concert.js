@@ -18,7 +18,6 @@ const Concert = ({ match }) => {
   const { playlist } = usePlayListState();
   const roomId = match.params.roomId;
 
-
   useEffect(() => {
     joinRoom(roomId);
   }, [roomId]);
@@ -81,21 +80,20 @@ const Concert = ({ match }) => {
 
   const deleteFromPlaylist = data => removeSong(data);
 
+  console.log(playlist);
   return (
     <section className={styles.Concert}>
       <Link to='/'>KaraoQueue</Link>
-      
+      {playlist && <h1>{playlist.roomName}&rsquo;s Concert</h1>}
       {playlist && <YouTube
-        videoId={playlist[0] ? playlist[0].song.videoId : null }
+        videoId={playlist.playlist[0] ? playlist.playlist[0].song.videoId : null }
         onEnd={onEnd}
       />}
 
       <button 
         className={styles['New-Song']}
         onClick={open}
-      >
-          Add Song
-      </button>
+      >Add Song</button>
 
       {modal && <section className={styles.Modal}>
         <button className={styles.Exit} onClick={close}>X</button>
@@ -117,7 +115,7 @@ const Concert = ({ match }) => {
       </section>}
 
       <ul className={styles.Playlist}>
-        {playlist && playlist.map(i => {
+        {playlist && playlist.playlist.map(i => {
           return <li key={i.song.videoId} >
             <h2>{i.name}</h2>
             <h3>{i.song.title}</h3>
