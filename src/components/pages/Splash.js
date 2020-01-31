@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import usePlaylistEmitters from '../hooks/playlistState';
+import usePlaylistEmitters from '../../hooks/playlistState';
 import styles from './splash.css';
 import shortid  from 'short-id';
 
@@ -34,6 +34,7 @@ const Start = ({ history }) => {
 
   return (
     <div className={styles.Splash}>
+      
       <header>
         <h1>KaraoQueue</h1>
       </header>
@@ -44,12 +45,17 @@ const Start = ({ history }) => {
           <input type="string" name="new" onChange={handleChange} placeholder="name of new concert"/>
           <button>create</button>
         </form>
+
         <form onSubmit={joinARoom}>
           <h2>join an existing concert</h2>
+          <p>ex: karaoqueue.netlify.com/
+            <span>7d3534</span>
+          </p>
           <input type="string" name="join" onChange={handleChange} placeholder="id of current concert"/>
           <button>join</button>
         </form>
       </section>
+
     </div>
   );
 };
