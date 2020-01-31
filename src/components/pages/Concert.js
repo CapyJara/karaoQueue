@@ -98,7 +98,7 @@ const Concert = ({ match }) => {
       {playlist && <header>
         <h1>{playlist.roomName}</h1>
         <h3>Shareable Link :</h3>
-        <h3 id="link" className={styles.Link} onClick={copyLink}>{window.location.href.slice(7)}</h3>
+        <h3 id="link" className={styles.Link} onClick={copyLink}>{window.location.href.split('//')[1]}</h3>
       </header>}
       {playlist && <YouTube
         videoId={playlist.playlist[0] ? playlist.playlist[0].song.videoId : null }
