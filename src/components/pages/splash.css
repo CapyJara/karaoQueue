@@ -15,6 +15,7 @@
     color: var(--pink);
     font-family: var(--header-font);
     font-Size: 1.6em;
+    letter-spacing: .01em;
   }
   
   section {
@@ -33,15 +34,15 @@
       color: var(--pink);
       text-shadow: .5px .5px rgb(66, 9, 73);
       font-size: 2em;
+      margin: .2em;
     }
     
     input {
       width: 14em;
-      height: 3em;
+      height: 2em;
       text-align: center;
       font-size: 1.2em;
       border: none;
-      border-radius: 24px;
       background: var(--off-white);
       color: var(--pink);
       font-family: var(--paragraph-font);
@@ -49,10 +50,8 @@
     
     button {
       margin: 1em;
-      padding: .5em;
-      width: 9em;
+      width: 5em;
       font-size: 1.2em;
-      border-radius: 24px;
       background: var(--off-white);
       color: var(--pink);
       font-family: var(--paragraph-font);
