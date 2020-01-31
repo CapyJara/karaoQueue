@@ -4,15 +4,13 @@ import styles from './concert.css';
 import usePlaylistEmitters from '../../hooks/playlistState';
 import { usePlayListState } from '../../socket';
 import YouTube from 'react-youtube';
-import search from '../../services/youtubeSearch';
 import { Link } from 'react-router-dom';
 import Modal from '../modal/Modal';
-
-const superSecretCode = 'AIzaSyBwTEj5b5Vol3PHBtF2ZzChHSzbSNpk24c';
+import PlayList from '../playlist/Playlist';
 
 const Concert = ({ match }) => {
   const [modal, toggleModal] = useState(false);
-  const { finishedSong, joinRoom, removeSong } = usePlaylistEmitters();
+  const { finishedSong, joinRoom } = usePlaylistEmitters();
   const { playlist } = usePlayListState();
   const roomId = match.params.roomId;
 
@@ -23,12 +21,7 @@ const Concert = ({ match }) => {
   const open = () => toggleModal(true);
   const close = () => toggleModal(false);
   
-  const onEnd = () => {
-    finishedSong(roomId);
-  };
-
-
-  const deleteFromPlaylist = data => removeSong(data);
+  const onEnd = () => finishedSong(roomId);
 
   const copyLink = e => {
     e.preventDefault();
@@ -62,20 +55,10 @@ const Concert = ({ match }) => {
 
       {modal && <Modal close={close}/>}
 
-      <ul className={styles.Playlist}>
-        {playlist && playlist.playlist.map(i => {
-          return <li key={i.song.videoId} >
-            <h2>{i.name}</h2>
-            <h3>{i.song.title}</h3>
-            <div onClick={() => deleteFromPlaylist(i)}>X</div>
-          </li>;
-        })}
-      </ul>
+      {playlist && <PlayList playlist={playlist.playlist}/>}
 
     </section>
   );
 };
 
 export default Concert;
-
-
