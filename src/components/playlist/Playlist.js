@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './playlist.css';
 import usePlaylistEmitters from '../../hooks/playlistState';
 
-
 const PlayList = ({ playlist }) => {
   const { removeSong } = usePlaylistEmitters();
   const deleteFromPlaylist = data => removeSong(data);
