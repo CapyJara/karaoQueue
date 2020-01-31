@@ -36,6 +36,16 @@
       font-size: 2em;
       margin: .2em;
     }
+
+    p {
+      margin-bottom: .5em;
+      color: var(--off-white);
+      
+      span {
+        color: var(--pink);
+        font-weight: bolder;
+      }
+    }
     
     input {
       width: 14em;
