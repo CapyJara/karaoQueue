@@ -8,7 +8,7 @@ const Start = ({ history }) => {
   const [newRoomName, setNewRoomName] = useState('');
   const [roomToJoin, setRoomToJoin] = useState('');
 
-  const { createRoom, joinRoom } = usePlaylistEmitters();
+  const { createRoom } = usePlaylistEmitters();
 
 
   const handleChange = ({ target }) => {
@@ -28,7 +28,6 @@ const Start = ({ history }) => {
   
   const joinARoom = e => {
     e.preventDefault();
-    joinRoom(roomToJoin);
     history.push(`/${roomToJoin}`);
   };
 

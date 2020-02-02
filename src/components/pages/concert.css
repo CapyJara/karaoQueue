@@ -25,7 +25,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 1em;
     letter-spacing: .03em;
 
     h1 {
@@ -49,16 +48,32 @@
       width: 22em;
     }
   }
+
+  h1 {
+    color: var(--pink);
+    text-align: center;
+    margin-top: 5em;
+  }
 }
 
-.New-Song {
+button {
   background: var(--off-white);
   height: 2em;
   margin: 1em;
-  width: 12em;
   font-family: var(--paragraph-font);
   font-weight: bold;
   font-size: 1.2em;
   display: flex;
   justify-content: center;
+  border: none;
 }
+
+.clicked {
+  animation: rainbow-color .2s ease-in-out;
+}
+
+@keyframes rainbow-color {
+  0% { background: var(--off-white)}
+  50% { background: var(--pink)}
+  100% { background: var(--off-white)}
+ }

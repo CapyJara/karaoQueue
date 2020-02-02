@@ -16,7 +16,7 @@ const Concert = ({ match }) => {
 
   useEffect(() => {
     joinRoom(roomId);
-  }, [roomId]);
+  }, []);
   
   const open = () => toggleModal(true);
   const close = () => toggleModal(false);
@@ -33,6 +33,10 @@ const Concert = ({ match }) => {
     dummy.select();
     document.execCommand('copy');
     document.body.removeChild(dummy);
+
+    const link = document.getElementById('link');
+    link.classList.add(styles.clicked);
+    setTimeout(() => link.classList.remove(styles.clicked), 200);
   };
 
   return (
@@ -40,25 +44,30 @@ const Concert = ({ match }) => {
       <Link to='/'>KaraoQueue</Link>
       {playlist && <header>
         <h1>{playlist.roomName}</h1>
-        <h3>Shareable Link :</h3>
-        <h3 id="link" className={styles.Link} onClick={copyLink}>{window.location.href.split('//')[1]}</h3>
+        <h3>Share link to invite friends</h3>
+        <button id="link" className={styles.Link} onClick={copyLink}>Click to copy shareable link</button>
       </header>}
       {playlist && <YouTube
         videoId={playlist.playlist[0] ? playlist.playlist[0].song.videoId : null }
         onEnd={onEnd}
       />}
 
-      <button 
+      {playlist && <button 
         className={styles['New-Song']}
         onClick={open}
-      >Add Song to the Queue</button>
+      >Add Song to the Queue</button>}
 
       {modal && <Modal close={close}/>}
 
       {playlist && <PlayList playlist={playlist.playlist}/>}
+
+      {!playlist && <div>
+        <h1>Could not find room with id {match.params.roomId.split('//')[0]}</h1>
+      </div>}
 
     </section>
   );
 };
 
 export default Concert;
+
