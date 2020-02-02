@@ -6,7 +6,7 @@
   left: 1em;
   background: var(--off-white);
   display: grid;
-  grid-template-rows: 23% 1fr;
+  grid-template-rows: 28% 1fr;
   border: 5px solid var(--pink) ;
 
   form {
@@ -83,6 +83,8 @@
   border: none;
   color: var(--pink);
   font-family: var(--paragraph-font);
+  margin: 0;
+  height: 1.5em;
 }
 
 .Shake {
@@ -105,6 +107,7 @@
 
 @media screen and (min-width: 600px) {
   .Modal {
+    grid-template-rows: 30% 1fr;
     right: 20%;
     left: 20%;
   }
