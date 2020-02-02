@@ -9,6 +9,7 @@ const PlayList = ({ playlist }) => {
 
   return (
     <ul className={styles.Playlist}>
+
       {playlist && playlist.map(i => {
         return <li key={i.song.videoId} >
           <h2>{i.name}</h2>
@@ -16,6 +17,7 @@ const PlayList = ({ playlist }) => {
           <div onClick={() => deleteFromPlaylist(i)}>X</div>
         </li>;
       })}
+      
     </ul>
   );
 };

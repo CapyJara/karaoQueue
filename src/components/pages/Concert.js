@@ -20,7 +20,6 @@ const Concert = ({ match }) => {
   
   const open = () => toggleModal(true);
   const close = () => toggleModal(false);
-  
   const onEnd = () => finishedSong(roomId);
 
   const copyLink = e => {
@@ -41,12 +40,19 @@ const Concert = ({ match }) => {
 
   return (
     <section className={styles.Concert}>
+
       <Link to='/'>KaraoQueue</Link>
+      
       {playlist && <header>
         <h1>{playlist.roomName}</h1>
         <h3>Share link to invite friends</h3>
-        <button id="link" className={styles.Link} onClick={copyLink}>Click to copy shareable link</button>
+        <button
+          id="link"
+          className={styles.Link}
+          onClick={copyLink}>
+          Click to copy shareable link</button>
       </header>}
+
       {playlist && <YouTube
         videoId={playlist.playlist[0] ? playlist.playlist[0].song.videoId : null }
         onEnd={onEnd}
@@ -54,16 +60,14 @@ const Concert = ({ match }) => {
 
       {playlist && <button 
         className={styles['New-Song']}
-        onClick={open}
-      >Add Song to the Queue</button>}
+        onClick={open}>
+        Add Song to the Queue</button>}
 
       {modal && <Modal close={close}/>}
 
       {playlist && <PlayList playlist={playlist.playlist}/>}
 
-      {!playlist && <div>
-        <h1>Could not find room with id {match.params.roomId.split('//')[0]}</h1>
-      </div>}
+      {!playlist && <h1>Could not find room with id {match.params.roomId.split('//')[0]}</h1>}
 
     </section>
   );

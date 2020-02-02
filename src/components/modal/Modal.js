@@ -14,19 +14,15 @@ const Modal = ({ match, close }) => {
   const { addLink } = usePlaylistEmitters();
   const roomId = match.params.roomId;
 
-  const handleNameChange = e => {
-    setName(e.target.value);
-  };
-
-  const handleLinkChange = e => {
-    setLink(e.target.value);
-  };
+  const handleNameChange = e => setName(e.target.value);
+  const handleLinkChange = e => setLink(e.target.value);
 
   const submit = e => {
     e.preventDefault();
     videoSearch(`${link} karaoke`);
     setLink('');
   };
+
   const videoSearch = (term) => {
     search({ key: superSecretCode, term }, (videos) => {
       setSearchList(videos.map(i => {
@@ -42,6 +38,7 @@ const Modal = ({ match, close }) => {
       }));
     });
   };
+
   const addToPlayList = (song) => {
     if(name) {
       const data = {
@@ -60,9 +57,12 @@ const Modal = ({ match, close }) => {
       }, 1100);
     }
   };
+
   return (
     <section className={styles.Modal}>
+
       <button className={styles.Exit} onClick={close}>X</button>
+      
       <form onSubmit={submit}>
         <input type="text" name="name" onChange={handleNameChange} value={name} placeholder="Your Name" autoComplete="off"/>
         <input type="text" name="link" onChange={handleLinkChange} value={link} placeholder="enter name of song" autoComplete="off"/>
@@ -77,7 +77,8 @@ const Modal = ({ match, close }) => {
               <h2>{i.title}</h2>
             </li>);
         })}
-      </ul>        
+      </ul>    
+          
     </section>
   );
 };

@@ -14,6 +14,7 @@ const search = (options, callback) => {
     part: 'snippet',
     key: options.key,
     q: options.term,
+    maxResults: 15,
   };
 
   axios.get(ROOT_URL, { params })

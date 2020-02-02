@@ -7,9 +7,7 @@ import shortid  from 'short-id';
 const Start = ({ history }) => {
   const [newRoomName, setNewRoomName] = useState('');
   const [roomToJoin, setRoomToJoin] = useState('');
-
   const { createRoom } = usePlaylistEmitters();
-
 
   const handleChange = ({ target }) => {
     const update = {
